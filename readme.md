@@ -1,10 +1,4 @@
-The page is hosted online at () till its graded, it will be taken down after grading and is not part of our AwardPoints Project. The DB details are given below in the form of SQL statements.
 
-For Hosting:
-
-1. Neon DB (Online Postgres server)
-
-2. 
 
 # Role-Based Access Control (RBAC) System
 
