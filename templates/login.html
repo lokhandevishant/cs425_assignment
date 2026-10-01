@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; margin-top: 100px; }
+        .login-box { border: 1px solid #ccc; padding: 20px; border-radius: 5px; width: 300px;}
+        input { width: 90%; padding: 10px; margin: 10px 0; }
+        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer;}
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>System Login</h2>
+        <input type="text" id="loginId" placeholder="Login ID" required>
+        <input type="password" id="pwd" placeholder="Password" required>
+        <button onclick="login()">Login</button>
+        <p id="errorMsg" style="color:red;"></p>
+    </div>
+
+    <script>
+        async function login() {
+            const loginId = document.getElementById('loginId').value;
+            const pwd = document.getElementById('pwd').value;
+
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ loginId, pwd })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userName', data.userName);
+                window.location.href = '/dashboard';
+            } else {
+                document.getElementById('errorMsg').innerText = data.message;
+            }
+        }
+    </script>
+</body>
+</html>
